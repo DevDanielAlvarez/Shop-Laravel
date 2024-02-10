@@ -20,10 +20,16 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+            if(empty(User::where('email','ddd@ddd.com')->get()->toArray())){
+                User::factory()->create([
+                    'name' => 'ddd',
+                    'email' => 'ddd@ddd.com'
+                ]);
+            }
 
-        User::factory()->create([
-            'name' => 'ddd',
-            'email' => 'ddd@ddd.com'
+
+        $this->call([
+            SupplierSeeder::class
         ]);
     }
 }
