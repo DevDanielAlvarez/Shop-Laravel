@@ -74,13 +74,15 @@ it('can order by name', function(){
     User::factory(10)->create();
     Supplier::factory(10)->create();
 
-    dd($suppliersByName = Supplier::join('users','user_id','=','users.id')->orderBy('name')->pluck('name'));
+    $suppliersByName = Supplier::join('users','user_id','=','users.id')->orderBy('name')->pluck('name');
+
+    expect($suppliersByName)->not->toBeEmpty();
 });
 
 it('id is uuid', function(){
 
     $supplier = Supplier::factory()->create();
 
-    expect(Str::uuid($supplier->id))->toBeTrue();
+    expect(Str::isUuid($supplier->id))->toBeTrue();
 
 });
