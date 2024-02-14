@@ -4,12 +4,12 @@ use App\Models\Color;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use Illuminate\Support\Str;
+use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
 
-it('can create and find', function(){
+it('can create and find', function () {
 
     $color = Color::factory()->create();
 
@@ -19,7 +19,7 @@ it('can create and find', function(){
 
 });
 
-it('can update', function(){
+it('can update', function () {
 
     $color = Color::factory()->create();
 
@@ -28,7 +28,7 @@ it('can update', function(){
     expect($color->name)->toEqual('new name');
 });
 
-it('can trash', function(){
+it('can trash', function () {
 
     $color = Color::factory()->create();
 
@@ -38,7 +38,7 @@ it('can trash', function(){
 
 });
 
-it('can restore', function(){
+it('can restore', function () {
 
     $color = Color::factory()->create();
 
@@ -50,7 +50,7 @@ it('can restore', function(){
 
 });
 
-it('can delete permanently',function(){
+it('can delete permanently', function () {
 
     $color = Color::factory()->create();
 
@@ -60,31 +60,31 @@ it('can delete permanently',function(){
 
 });
 
-it('name is not null', function(){
+it('name is not null', function () {
 
-   $this->expectException(QueryException::class);
+    $this->expectException(QueryException::class);
 
     Color::factory()->create(['name' => null]);
 
 });
 
-it('name, code is unique', function(){
+it('name, code is unique', function () {
 
     $this->expectException(UniqueConstraintViolationException::class);
 
     Color::factory()->create([
         'name' => 'white',
-        'code' => '#ffff'
+        'code' => '#ffff',
     ]);
 
     Color::factory()->create([
         'name' => 'white',
-        'code' => '#ffff'
+        'code' => '#ffff',
     ]);
 
 });
 
-it('can order by name, code', function(){
+it('can order by name, code', function () {
 
     $color = Color::factory(5)->create();
 
@@ -98,7 +98,7 @@ it('can order by name, code', function(){
 
 });
 
-it('id is a uuid', function(){
+it('id is a uuid', function () {
 
     $color = Color::factory()->create();
 

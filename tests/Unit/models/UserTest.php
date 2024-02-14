@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
 
-it("can create and find a user", function(){
+it('can create and find a user', function () {
 
     $user = User::factory()->create();
 
@@ -19,7 +19,7 @@ it("can create and find a user", function(){
 
 });
 
-it("can update a user", function(){
+it('can update a user', function () {
 
     $user = User::factory()->create();
 
@@ -29,7 +29,7 @@ it("can update a user", function(){
 
 });
 
-it('can delete a user', function(){
+it('can delete a user', function () {
 
     $user = User::factory()->create();
 
@@ -39,14 +39,14 @@ it('can delete a user', function(){
 
 });
 
-it('can restore a user', function(){
+it('can restore a user', function () {
     $user = User::factory()->create();
     $user->delete();
     $user->restore();
     expect($user->trashed())->not->toBeTrue();
 });
 
-it("can permanently delete a user", function(){
+it('can permanently delete a user', function () {
 
     $user = User::factory()->create();
 
@@ -56,20 +56,20 @@ it("can permanently delete a user", function(){
 
 });
 
-it("name,email and password is required",function(){
+it('name,email and password is required', function () {
     $this->expectException(QueryException::class);
     User::factory()->create([
         'name' => null,
         'email' => null,
-        'password' => null
+        'password' => null,
     ]);
 });
 
-it('email is unique', function(){
+it('email is unique', function () {
     $this->expectException(UniqueConstraintViolationException::class);
     User::factory(2)->create(['email' => '123@123.com']);
 });
-it('password is hash', function(){
+it('password is hash', function () {
 
     $user = User::factory()->create(['password' => bcrypt('12345678')]);
 
@@ -77,7 +77,7 @@ it('password is hash', function(){
 
 });
 
-it('can order by name or email', function(){
+it('can order by name or email', function () {
 
     User::factory(10)->create();
 
@@ -85,6 +85,5 @@ it('can order by name or email', function(){
     $usersByEmail = User::orderBy('email')->get()->pluck('email');
     expect($usersByEmail)->not->toBeEmpty();
     expect($usersByName)->not->toBeEmpty();
-
 
 });

@@ -2,7 +2,8 @@
 
 namespace App\Enums;
 
-Enum SupplierStatusEnum :string{
+enum SupplierStatusEnum: string
+{
     case A = 'active';
     case I = 'inactive';
 }

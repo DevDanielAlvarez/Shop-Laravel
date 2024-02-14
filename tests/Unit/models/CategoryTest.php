@@ -4,12 +4,12 @@ use App\Models\Category;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use Illuminate\Support\Str;
+use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
 
-it('can create and find a category', function(){
+it('can create and find a category', function () {
 
     $category = Category::factory()->create();
 
@@ -19,7 +19,7 @@ it('can create and find a category', function(){
 
 });
 
-it('can update a category', function(){
+it('can update a category', function () {
 
     $category = Category::factory()->create();
 
@@ -29,7 +29,7 @@ it('can update a category', function(){
 
 });
 
-it('can trash a category', function(){
+it('can trash a category', function () {
 
     $category = Category::factory()->create();
 
@@ -39,7 +39,7 @@ it('can trash a category', function(){
 
 });
 
-it('can restore a category', function(){
+it('can restore a category', function () {
     $category = Category::factory()->create();
 
     $category->delete();
@@ -49,7 +49,7 @@ it('can restore a category', function(){
     expect($category->trashed())->toBeFalse();
 });
 
-it('can permanently delete a category',function(){
+it('can permanently delete a category', function () {
     $category = Category::factory()->create();
 
     $category->forceDelete();
@@ -57,14 +57,14 @@ it('can permanently delete a category',function(){
     $this->assertDataBaseMissing('categories', ['id' => $category->id]);
 });
 
-it('name is not null', function(){
+it('name is not null', function () {
     $this->expectException(QueryException::class);
 
     Category::factory()->create(['name' => null]);
 
 });
 
-it('name is unique', function(){
+it('name is unique', function () {
 
     $this->expectException(UniqueConstraintViolationException::class);
 
@@ -73,7 +73,7 @@ it('name is unique', function(){
 
 });
 
-it('can order by name', function(){
+it('can order by name', function () {
 
     Category::factory(3)->create();
 
@@ -82,7 +82,7 @@ it('can order by name', function(){
     expect($categories)->not->toBeEmpty();
 });
 
-it('id is a uuid',function(){
+it('id is a uuid', function () {
 
     $category = Category::factory()->create();
 

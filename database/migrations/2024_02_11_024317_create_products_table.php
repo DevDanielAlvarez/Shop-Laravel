@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\SupplierStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('suppliers', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained();
-            $table->enum('status', array_column(SupplierStatusEnum::cases(), 'name'))->default(SupplierStatusEnum::A->name);
+            $table->string('name');
+            $table->foreignUuid('category_id')->nullable()->constrained();
+            $table->float('weight');
+            $table->foreignUuid('supplier_id')->constrained();
+            $table->text('description')->nullable();
+            $table->integer('quantity');
 
             $table->softDeletes();
             $table->timestamps();
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('suppliers');
+        Schema::dropIfExists('products');
     }
 };

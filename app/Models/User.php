@@ -18,10 +18,10 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
     use HasUuids;
+    use Notifiable;
     use SoftDeletes;
+    use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -64,7 +64,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function supplier(){
+    public function supplier()
+    {
         return $this->hasOne(Supplier::class);
     }
 }

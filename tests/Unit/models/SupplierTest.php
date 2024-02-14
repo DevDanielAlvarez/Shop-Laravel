@@ -4,12 +4,12 @@ use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use Illuminate\Support\Str;
+use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
 
-it('can create and find a supplier', function(){
+it('can create and find a supplier', function () {
     $supplierCreated = Supplier::factory()->create();
 
     $supplierFound = Supplier::find($supplierCreated->id);
@@ -17,7 +17,7 @@ it('can create and find a supplier', function(){
     expect($supplierCreated->id)->toEqual($supplierFound->id);
 });
 
-it('can update a supplier', function(){
+it('can update a supplier', function () {
 
     $supplierCreated = Supplier::factory()->create();
 
@@ -29,7 +29,7 @@ it('can update a supplier', function(){
 
 });
 
-it('can trash a supplier', function(){
+it('can trash a supplier', function () {
 
     $supplier = Supplier::factory()->create();
     $supplier->delete();
@@ -37,7 +37,7 @@ it('can trash a supplier', function(){
 
 });
 
-it('can restore a supplier', function(){
+it('can restore a supplier', function () {
 
     $supplier = Supplier::factory()->create();
     $supplier->delete();
@@ -46,7 +46,7 @@ it('can restore a supplier', function(){
 
 });
 
-it('can delete permanently a supplier', function(){
+it('can delete permanently a supplier', function () {
 
     $supplier = Supplier::factory()->create();
     $supplier->forceDelete();
@@ -54,7 +54,7 @@ it('can delete permanently a supplier', function(){
 
 });
 
-it('status is not null', function(){
+it('status is not null', function () {
 
     $this->expectException(QueryException::class);
 
@@ -62,7 +62,7 @@ it('status is not null', function(){
 
 });
 
-it('the supplier has a user', function(){
+it('the supplier has a user', function () {
 
     $supplier = Supplier::factory()->create();
 
@@ -70,16 +70,16 @@ it('the supplier has a user', function(){
 
 });
 
-it('can order by name', function(){
+it('can order by name', function () {
     User::factory(10)->create();
     Supplier::factory(10)->create();
 
-    $suppliersByName = Supplier::join('users','user_id','=','users.id')->orderBy('name')->pluck('name');
+    $suppliersByName = Supplier::join('users', 'user_id', '=', 'users.id')->orderBy('name')->pluck('name');
 
     expect($suppliersByName)->not->toBeEmpty();
 });
 
-it('id is uuid', function(){
+it('id is uuid', function () {
 
     $supplier = Supplier::factory()->create();
 

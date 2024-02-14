@@ -20,7 +20,7 @@ class SupplierFactory extends Factory
     {
         return [
             'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
-            'status' => $this->faker->randomElement(array_column(SupplierStatusEnum::cases(),'name'))
+            'status' => $this->faker->randomElement(array_column(SupplierStatusEnum::cases(), 'name')),
         ];
     }
 }
