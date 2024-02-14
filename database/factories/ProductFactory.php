@@ -24,7 +24,6 @@ class ProductFactory extends Factory
             'weight' => $this->faker->randomNumber(2, true),
             'supplier_id' => Supplier::inRandomOrder()->first()->id ?? Supplier::factory()->create()->id,
             'description' => $this->faker->text(),
-            'quantity' => $this->faker->randomNumber(2),
         ];
     }
 }

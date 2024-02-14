@@ -18,7 +18,6 @@ return new class extends Migration
             $table->float('weight');
             $table->foreignUuid('supplier_id')->constrained();
             $table->text('description')->nullable();
-            $table->integer('quantity');
 
             $table->softDeletes();
             $table->timestamps();

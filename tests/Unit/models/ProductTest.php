@@ -57,7 +57,7 @@ it('can delete permanently', function () {
 
 });
 
-it('name,weight,supplier_id and quantity is not null', function () {
+it('name,weight and supplier_id is not null', function () {
 
     $this->expectException(QueryException::class);
 
@@ -65,7 +65,6 @@ it('name,weight,supplier_id and quantity is not null', function () {
         'name' => null,
         'weight' => null,
         'supplier_id' => null,
-        'quantity' => null,
     ]);
 
 });
@@ -78,11 +77,9 @@ it('can orderBy name,weight and quantity', function () {
 
     $productOrderByWeight = Product::orderBy('weight')->pluck('weight');
 
-    $productOrderByQuantity = Product::orderBy('quantity')->pluck('quantity');
 
     expect($productsOrderByName)->not->toBeEmpty();
     expect($productOrderByWeight)->not->toBeEmpty();
-    expect($productOrderByQuantity)->not->toBeEmpty();
 
 });
 
