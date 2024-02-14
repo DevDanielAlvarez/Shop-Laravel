@@ -14,14 +14,15 @@ class ColorFactory extends Factory
      *
      * @return array<string, mixed>
      */
-
-    public static function generateRandomColorCode($faker){
+    public static function generateRandomColorCode($faker)
+    {
 
         $letters = '';
-        for ($i = 0; $i<5; $i++){
+        for ($i = 0; $i < 5; $i++) {
             $letters .= $faker->randomLetter();
         }
-        return '#'. $letters .$faker->randomNumber(1);
+
+        return '#'.$letters.$faker->randomNumber(1);
 
     }
 
@@ -29,7 +30,7 @@ class ColorFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->colorName(),
-            'code' => self::generateRandomColorCode($this->faker)
+            'code' => self::generateRandomColorCode($this->faker),
         ];
     }
 }
