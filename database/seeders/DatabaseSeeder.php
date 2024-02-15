@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
 
             //priority 3
-            ColorProductSeeder::class
+            ColorProductSeeder::class,
 
         ]);
     }
