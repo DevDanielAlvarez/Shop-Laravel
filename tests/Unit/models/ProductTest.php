@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Color;
 use App\Models\Product;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -67,6 +68,17 @@ it('name,weight and supplier_id is not null', function () {
         'supplier_id' => null,
     ]);
 
+});
+
+it('can have colors', function(){
+
+    $product = Product::factory()->create();
+
+    Color::factory(2)->create()->each(function(Color $color) use ($product){
+        $product->colors()->attach($color,['quantity' => 5]);
+    });
+
+    expect($product->colors)->toHaveCount(2);
 });
 
 it('can orderBy name,weight and quantity', function () {

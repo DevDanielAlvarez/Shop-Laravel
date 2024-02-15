@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('colors', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name')->unique();
-            $table->string('code', 9);
+        Schema::create('color_product', function (Blueprint $table) {
+            $table->id('id');
 
-            $table->softDeletes();
+            $table->foreignUuid('color_id')->constrained();
+            $table->foreignUuid('product_id')->constrained();
+
+            $table->integer('quantity');
+
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('colors');
+        Schema::dropIfExists('color_product');
     }
 };
