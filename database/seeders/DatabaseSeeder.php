@@ -28,7 +28,18 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call([
+            //priority 1
+            UserSeeder::class,
+            ColorSeeder::class,
+            CategorySeeder::class,
+
+            //priority 2
             SupplierSeeder::class,
+            ProductSeeder::class,
+
+            //priority 3
+            ColorProductSeeder::class
+
         ]);
     }
 }
