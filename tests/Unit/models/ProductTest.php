@@ -70,12 +70,12 @@ it('name,weight and supplier_id is not null', function () {
 
 });
 
-it('can have colors', function(){
+it('can have colors', function () {
 
     $product = Product::factory()->create();
 
-    Color::factory(2)->create()->each(function(Color $color) use ($product){
-        $product->colors()->attach($color,['quantity' => 5]);
+    Color::factory(2)->create()->each(function (Color $color) use ($product) {
+        $product->colors()->attach($color, ['quantity' => 5]);
     });
 
     expect($product->colors)->toHaveCount(2);
@@ -88,7 +88,6 @@ it('can orderBy name,weight and quantity', function () {
     $productsOrderByName = Product::orderBy('name')->pluck('name');
 
     $productOrderByWeight = Product::orderBy('weight')->pluck('weight');
-
 
     expect($productsOrderByName)->not->toBeEmpty();
     expect($productOrderByWeight)->not->toBeEmpty();

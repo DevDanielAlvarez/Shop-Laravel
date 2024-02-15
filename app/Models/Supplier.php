@@ -20,7 +20,8 @@ class Supplier extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function products():HasMany{
+    public function products(): HasMany
+    {
         return $this->hasMany(Product::class);
     }
 }

@@ -14,7 +14,8 @@ class Color extends Model
 
     protected $guarded = ['id'];
 
-    public function products():BelongsToMany{
+    public function products(): BelongsToMany
+    {
 
         return $this->belongsToMany(Product::class)->withPivot(['quantity']);
 

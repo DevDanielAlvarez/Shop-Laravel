@@ -25,7 +25,8 @@ class Product extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public function colors():BelongsToMany{
+    public function colors(): BelongsToMany
+    {
 
         return $this->belongsToMany(Color::class);
 

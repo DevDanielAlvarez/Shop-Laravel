@@ -67,19 +67,19 @@ it('name and code is not null', function () {
 
     Color::factory()->create([
         'name' => null,
-        'code' => null
+        'code' => null,
     ]);
 
 });
 
-it('pivot column quantity is not null (color_product)', function(){
+it('pivot column quantity is not null (color_product)', function () {
 
     $this->expectException(QueryException::class);
 
     $color = Color::factory()->create();
     $product = Product::factory()->create();
 
-    $color->products()->attach($product,['quantity' => null]);
+    $color->products()->attach($product, ['quantity' => null]);
 
 });
 
@@ -99,13 +99,13 @@ it('name, code is unique', function () {
 
 });
 
-it('can have products', function(){
+it('can have products', function () {
 
     $color = Color::factory()->create();
-    Product::factory(2)->create()->each(function(Product $product) use ($color){
+    Product::factory(2)->create()->each(function (Product $product) use ($color) {
 
-        $product->colors()->attach($color,[
-            'quantity' => 3
+        $product->colors()->attach($color, [
+            'quantity' => 3,
         ]);
 
     });
