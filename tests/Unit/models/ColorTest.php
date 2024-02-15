@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Color;
+use App\Models\Product;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -60,11 +61,25 @@ it('can delete permanently', function () {
 
 });
 
-it('name is not null', function () {
+it('name and code is not null', function () {
 
     $this->expectException(QueryException::class);
 
-    Color::factory()->create(['name' => null]);
+    Color::factory()->create([
+        'name' => null,
+        'code' => null,
+    ]);
+
+});
+
+it('pivot column quantity is not null (color_product)', function () {
+
+    $this->expectException(QueryException::class);
+
+    $color = Color::factory()->create();
+    $product = Product::factory()->create();
+
+    $color->products()->attach($product, ['quantity' => null]);
 
 });
 
@@ -82,6 +97,20 @@ it('name, code is unique', function () {
         'code' => '#ffff',
     ]);
 
+});
+
+it('can have products', function () {
+
+    $color = Color::factory()->create();
+    Product::factory(2)->create()->each(function (Product $product) use ($color) {
+
+        $product->colors()->attach($color, [
+            'quantity' => 3,
+        ]);
+
+    });
+
+    expect($color->products)->toHaveCount(2);
 });
 
 it('can order by name, code', function () {
